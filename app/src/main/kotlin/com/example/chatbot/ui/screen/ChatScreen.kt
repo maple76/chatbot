@@ -53,7 +53,6 @@ fun ChatScreen(chatViewModel: ChatViewModel = viewModel()) {
     var inputText by remember { mutableStateOf("") }
     val snackbarHostState = remember { SnackbarHostState() }
 
-    // Effect to show Snackbar when errorMessage changes
     LaunchedEffect(errorMessage) {
         errorMessage?.let {
             snackbarHostState.showSnackbar(it)
@@ -80,14 +79,14 @@ fun ChatScreen(chatViewModel: ChatViewModel = viewModel()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it) // Apply padding from Scaffold
+                    .padding(it)
             ) {
                 LazyColumn(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth(),
                     contentPadding = PaddingValues(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp) // Add spacing between messages
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     items(messages) {
                         MessageBubble(message = it)

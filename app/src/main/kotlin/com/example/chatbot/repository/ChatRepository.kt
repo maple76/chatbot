@@ -9,6 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ChatRepository {
+    val BASE_URL = "http://guanaco-submitter.guanaco-backend.k2.chaiverse.com"
+    val BEARER_TOKEN = "CR_14d43f2bf78b4b0590c2a8b87f354746"
 
     val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -18,13 +20,13 @@ class ChatRepository {
         .addInterceptor(logging)
         .addInterceptor(
             AuthInterceptor {
-                "CR_14d43f2bf78b4b0590c2a8b87f354746"
+                BEARER_TOKEN
             }
         )
         .build()
 
     private val chatApiService: ChatApiService = Retrofit.Builder()
-        .baseUrl("http://guanaco-submitter.guanaco-backend.k2.chaiverse.com") // TODO: Replace with your actual API base URL if different
+        .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
